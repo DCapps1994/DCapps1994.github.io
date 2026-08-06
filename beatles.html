@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Beatles Essentials — Tracklist | Jelkin's Jams</title>
+<meta name="description" content="Full tracklist for the Beatles Essentials cassette pack — a lore-friendly Project Zomboid music mod.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap');
+
+  :root{
+    --paper:      #EDE6D3;
+    --paper-deep: #E1D8C0;
+    --card:       #F7F2E4;
+    --ink:        #262117;
+    --ink-soft:   #6b6252;
+    --rule:       #cdc1a2;
+    --rust:       #9C3B2E;
+    --olive:      #4B6455;
+    --mustard:    #B9860B;
+    --plum:       #5B4A72;
+    --tape:       #3a342a;
+    --tape-shine: #55493a;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0 1px, transparent 1px 3px);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+
+  a{ color:var(--rust); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:3px solid var(--mustard);
+    outline-offset:2px;
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px 80px; }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding:56px 24px 36px;
+    text-align:left;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .backlink{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+  }
+  .backlink a{ color:var(--ink-soft); }
+  .backlink a:hover{ color:var(--rust); }
+
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:750;
+    font-style:italic;
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    line-height:0.98;
+    margin:14px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 0 22px;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:28px;
+  }
+  .meta-row span{ white-space:nowrap; }
+  .meta-row span::before{ content:"— "; color:var(--rule); }
+  .meta-row span:first-child::before{ content:""; }
+
+  /* tape leader stripe — signature motif */
+  .leader{
+    height:34px;
+    border-radius:4px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--tape) 0px, var(--tape) 26px,
+      var(--tape-shine) 26px, var(--tape-shine) 30px
+    );
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.35);
+    position:relative;
+    overflow:hidden;
+  }
+  .leader::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), transparent 40%);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    margin:34px 0 8px;
+  }
+  #search{
+    flex:1 1 260px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.92rem;
+    padding:12px 16px;
+    border:1.5px solid var(--ink);
+    border-radius:8px;
+    background:var(--card);
+    color:var(--ink);
+  }
+  #search::placeholder{ color:var(--ink-soft); }
+  #count{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+
+  .jumprow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:18px 0 6px;
+  }
+  .jumprow a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    padding:5px 10px;
+    border:1px solid var(--rule);
+    border-radius:20px;
+    color:var(--ink-soft);
+    background:var(--card);
+  }
+  .jumprow a:hover{
+    border-color:var(--rust);
+    color:var(--rust);
+    text-decoration:none;
+  }
+
+  /* ---------- Cassette grid ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+    gap:30px;
+    margin-top:30px;
+  }
+
+  .cassette{
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:0 1px 0 var(--rule), 0 10px 24px -14px rgba(30,25,15,0.45);
+    overflow:hidden;
+    scroll-margin-top:20px;
+    display:flex;
+    flex-direction:column;
+  }
+  .cassette[hidden]{ display:none; }
+
+  .shell{
+    background:var(--tape);
+    color:#EDE6D3;
+    padding:18px 16px 14px;
+    display:grid;
+    grid-template-columns:44px 1fr 44px;
+    align-items:center;
+    gap:10px;
+    position:relative;
+  }
+  .shell::before{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:6px;
+    background:linear-gradient(90deg, var(--spine, var(--rust)), transparent 85%);
+    opacity:0.9;
+  }
+  .reel{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 50%, #1c1812 0 6px, transparent 6.5px),
+      repeating-conic-gradient(#2c261c 0deg 14deg, #16130e 14deg 28deg);
+    border:3px solid #16130e;
+    box-shadow: inset 0 0 0 3px #0f0c08;
+  }
+  .label-block{ text-align:center; min-width:0; }
+  .label-era{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--spine, var(--rust));
+    display:block;
+    margin-bottom:2px;
+  }
+  .label-title{
+    font-family:'Fraunces', serif;
+    font-weight:650;
+    font-size:1.18rem;
+    line-height:1.15;
+    margin:0;
+    color:#F7F2E4;
+  }
+
+  .sides{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    flex:1;
+  }
+  .side{
+    padding:16px 14px 18px;
+  }
+  .side + .side{ border-left:1px dashed var(--rule); }
+  .side h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--spine, var(--rust));
+    margin:0 0 8px;
+  }
+  .side ol{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset:trk;
+  }
+  .side li{
+    counter-increment:trk;
+    display:flex;
+    gap:8px;
+    font-size:0.86rem;
+    padding:3px 0;
+    line-height:1.32;
+  }
+  .side li::before{
+    content:counter(trk);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    min-width:1.1em;
+    text-align:right;
+    padding-top:1px;
+  }
+  .side li.no-match{ display:none; }
+
+  .card-empty-note{
+    padding:14px 16px 18px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  /* spine colour rotation */
+  .spine-rust   { --spine:#c15c46; }
+  .spine-olive  { --spine:#7fa085; }
+  .spine-mustard{ --spine:#dcab3d; }
+  .spine-plum   { --spine:#9b87b8; }
+
+  .no-results{
+    display:none;
+    padding:40px 20px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.88rem;
+  }
+  .no-results.show{ display:block; }
+
+  footer{
+    margin-top:70px;
+    padding-top:22px;
+    border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem;
+    color:var(--ink-soft);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 20px;
+    justify-content:space-between;
+  }
+
+  @media (max-width:520px){
+    .sides{ grid-template-columns:1fr; }
+    .side + .side{ border-left:none; border-top:1px dashed var(--rule); }
+    .shell{ grid-template-columns:36px 1fr 36px; }
+    .reel{ width:36px; height:36px; }
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .cassette{ transition:transform 0.15s ease, box-shadow 0.15s ease; }
+    .cassette:hover{ transform:translateY(-2px); box-shadow:0 1px 0 var(--rule), 0 16px 30px -16px rgba(30,25,15,0.55); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="backlink">← <a href="index.html">Jelkin's Jams / tracklist index</a></p>
+  <h1 class="title">The Beatles<br>Essentials</h1>
+  <p class="subtitle">Every cassette in the pack, side A to side B — ten studio albums plus two bonus compilations, ripped for the wasteland.</p>
+  <div class="meta-row">
+    <span>12 cassettes</span>
+    <span>167 tracks</span>
+    <span>1963–1970</span>
+    <span>Lore cutoff: pre‑July 1993</span>
+    <span>Framework: Talismon NMB</span>
+  </div>
+  <div class="leader" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search a song or album… (e.g. “Yesterday”, “Abbey Road”)" aria-label="Search tracklist">
+    <span id="count"></span>
+  </div>
+
+  <nav class="jumprow" aria-label="Jump to album">
+    <a href="#ppm63">Please Please Me</a>
+    <a href="#wtb63">With The Beatles</a>
+    <a href="#ahdn64">A Hard Day's Night</a>
+    <a href="#help65">Help!</a>
+    <a href="#rs65">Rubber Soul</a>
+    <a href="#rev66">Revolver</a>
+    <a href="#sgt67">Sgt. Pepper's</a>
+    <a href="#mmt67">Magical Mystery Tour</a>
+    <a href="#ar69">Abbey Road</a>
+    <a href="#lib70">Let It Be</a>
+    <a href="#hits">Assorted Hits</a>
+    <a href="#solo">Solo Works</a>
+  </nav>
+
+  <div class="grid" id="grid">
+
+    <article class="cassette spine-rust" id="ppm63">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1963 · Parlophone</span>
+          <h2 class="label-title">Please Please Me</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>I Saw Her Standing There</li>
+            <li>Misery</li>
+            <li>Anna (Go to Him)</li>
+            <li>Chains</li>
+            <li>Boys</li>
+            <li>Ask Me Why</li>
+            <li>Please Please Me</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Love Me Do</li>
+            <li>P.S. I Love You</li>
+            <li>Baby It's You</li>
+            <li>Do You Want to Know a Secret</li>
+            <li>A Taste of Honey</li>
+            <li>There's a Place</li>
+            <li>Twist and Shout</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-olive" id="wtb63">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1963 · Parlophone</span>
+          <h2 class="label-title">With The Beatles</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>It Won't Be Long</li>
+            <li>All I've Got to Do</li>
+            <li>All My Loving</li>
+            <li>Don't Bother Me</li>
+            <li>Little Child</li>
+            <li>Till There Was You</li>
+            <li>Please Mister Postman</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Roll Over Beethoven</li>
+            <li>Hold Me Tight</li>
+            <li>You Really Got a Hold on Me</li>
+            <li>I Wanna Be Your Man</li>
+            <li>Devil in Her Heart</li>
+            <li>Not a Second Time</li>
+            <li>Money (That's What I Want)</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-mustard" id="ahdn64">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1964 · Parlophone</span>
+          <h2 class="label-title">A Hard Day's Night</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>A Hard Day's Night</li>
+            <li>And I Love Her</li>
+            <li>Any Time at All</li>
+            <li>Can't Buy Me Love</li>
+            <li>If I Fell</li>
+            <li>I'll Be Back</li>
+            <li>I'll Cry Instead</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>I Should Have Known Better</li>
+            <li>I'm Happy Just to Dance with You</li>
+            <li>Tell Me Why</li>
+            <li>Things We Said Today</li>
+            <li>When I Get Home</li>
+            <li>You Can't Do That</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-plum" id="help65">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1965 · Parlophone</span>
+          <h2 class="label-title">Help!</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Act Naturally</li>
+            <li>Another Girl</li>
+            <li>Dizzy Miss Lizzy</li>
+            <li>Help!</li>
+            <li>I Need You</li>
+            <li>It's Only Love</li>
+            <li>I've Just Seen a Face</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Tell Me What You See</li>
+            <li>The Night Before</li>
+            <li>Ticket to Ride</li>
+            <li>Yesterday</li>
+            <li>You Like Me Too Much</li>
+            <li>You're Going to Lose That Girl</li>
+            <li>You've Got to Hide Your Love Away</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-rust" id="rs65">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1965 · Parlophone</span>
+          <h2 class="label-title">Rubber Soul</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Drive My Car</li>
+            <li>Girl</li>
+            <li>If I Needed Someone</li>
+            <li>I'm Looking Through You</li>
+            <li>In My Life</li>
+            <li>Michelle</li>
+            <li>Norwegian Wood (This Bird Has Flown)</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Nowhere Man</li>
+            <li>Run for Your Life</li>
+            <li>The Word</li>
+            <li>Think for Yourself</li>
+            <li>Wait</li>
+            <li>What Goes On</li>
+            <li>You Won't See Me</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-olive" id="rev66">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1966 · Parlophone</span>
+          <h2 class="label-title">Revolver</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>And Your Bird Can Sing</li>
+            <li>Doctor Robert</li>
+            <li>Eleanor Rigby</li>
+            <li>For No One</li>
+            <li>Good Day Sunshine</li>
+            <li>Got to Get You into My Life</li>
+            <li>Here, There and Everywhere</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>I Want to Tell You</li>
+            <li>I'm Only Sleeping</li>
+            <li>Love You To</li>
+            <li>She Said She Said</li>
+            <li>Taxman</li>
+            <li>Tomorrow Never Knows</li>
+            <li>Yellow Submarine</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-mustard" id="sgt67">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1967 · Parlophone</span>
+          <h2 class="label-title">Sgt. Pepper's Lonely Hearts Club Band</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Sgt. Pepper's Lonely Hearts Club Band</li>
+            <li>With a Little Help from My Friends</li>
+            <li>Lucy in the Sky with Diamonds</li>
+            <li>Getting Better</li>
+            <li>Fixing a Hole</li>
+            <li>She's Leaving Home</li>
+            <li>Being for the Benefit of Mr. Kite!</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Within You Without You</li>
+            <li>When I'm Sixty‑Four</li>
+            <li>Lovely Rita</li>
+            <li>Good Morning Good Morning</li>
+            <li>Sgt. Pepper's Lonely Hearts Club Band (Reprise)</li>
+            <li>A Day in the Life</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-plum" id="mmt67">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1967 · Parlophone</span>
+          <h2 class="label-title">Magical Mystery Tour</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>All You Need Is Love</li>
+            <li>Baby You're a Rich Man</li>
+            <li>Flying</li>
+            <li>Hello, Goodbye</li>
+            <li>I Am the Walrus</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Magical Mystery Tour</li>
+            <li>Penny Lane</li>
+            <li>Strawberry Fields Forever</li>
+            <li>The Fool on the Hill</li>
+            <li>Your Mother Should Know</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-rust" id="ar69">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1969 · Apple</span>
+          <h2 class="label-title">Abbey Road</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Because</li>
+            <li>Carry That Weight</li>
+            <li>Come Together</li>
+            <li>Golden Slumbers</li>
+            <li>Her Majesty</li>
+            <li>Here Comes the Sun</li>
+            <li>I Want You (She's So Heavy)</li>
+            <li>Maxwell's Silver Hammer</li>
+            <li>Mean Mr. Mustard</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Octopus's Garden</li>
+            <li>Oh! Darling</li>
+            <li>Polythene Pam</li>
+            <li>She Came in Through the Bathroom Window</li>
+            <li>Something</li>
+            <li>Sun King</li>
+            <li>The End</li>
+            <li>You Never Give Me Your Money</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-olive" id="lib70">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">1970 · Apple</span>
+          <h2 class="label-title">Let It Be</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Across the Universe</li>
+            <li>Dig a Pony</li>
+            <li>Dig It</li>
+            <li>For You Blue</li>
+            <li>Get Back</li>
+            <li>I Me Mine</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>I've Got a Feeling</li>
+            <li>Let It Be</li>
+            <li>Maggie Mae</li>
+            <li>One After 909</li>
+            <li>The Long and Winding Road</li>
+            <li>Two of Us</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-mustard" id="hits">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">Singles compilation</span>
+          <h2 class="label-title">Assorted Hits</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Back in the U.S.S.R.</li>
+            <li>Blackbird</li>
+            <li>Day Tripper</li>
+            <li>Dear Prudence</li>
+            <li>Happiness Is a Warm Gun</li>
+            <li>Helter Skelter</li>
+            <li>Hey Jude</li>
+            <li>I Feel Fine</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>I Want to Hold Your Hand</li>
+            <li>Lady Madonna</li>
+            <li>Ob‑La‑Di, Ob‑La‑Da</li>
+            <li>Paperback Writer</li>
+            <li>Revolution</li>
+            <li>She Loves You</li>
+            <li>We Can Work It Out</li>
+            <li>While My Guitar Gently Weeps</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <article class="cassette spine-plum" id="solo">
+      <div class="shell">
+        <div class="reel"></div>
+        <div class="label-block">
+          <span class="label-era">Post‑breakup solo compilation</span>
+          <h2 class="label-title">Solo Works</h2>
+        </div>
+        <div class="reel"></div>
+      </div>
+      <div class="sides">
+        <div class="side">
+          <h4>Side A</h4>
+          <ol>
+            <li>Band on the Run — Paul McCartney &amp; Wings</li>
+            <li>Coming Up — Paul McCartney</li>
+            <li>Ebony and Ivory — Paul McCartney &amp; Stevie Wonder</li>
+            <li>Give Me Love (Give Me Peace on Earth) — George Harrison</li>
+            <li>Got My Mind Set on You — George Harrison</li>
+            <li>Happy Xmas (War Is Over) — John &amp; Yoko</li>
+            <li>Jet — Paul McCartney &amp; Wings</li>
+            <li>Maybe I'm Amazed — Paul McCartney</li>
+          </ol>
+        </div>
+        <div class="side">
+          <h4>Side B</h4>
+          <ol>
+            <li>Give Peace a Chance — John Lennon</li>
+            <li>Imagine — John Lennon</li>
+            <li>It Don't Come Easy — Ringo Starr</li>
+            <li>My Sweet Lord — George Harrison</li>
+            <li>Photograph — Ringo Starr</li>
+            <li>Say Say Say — Paul McCartney &amp; Michael Jackson</li>
+            <li>Silly Love Songs — Paul McCartney &amp; Wings</li>
+            <li>What Is Life — George Harrison</li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <p class="no-results" id="noResults">No tracks or albums match that search.</p>
+
+  <footer>
+    <span>Jelkin's Jams · lore‑friendly PZ music mods</span>
+    <span><a href="index.html">← back to tracklist index</a></span>
+  </footer>
+
+</main>
+
+<script>
+  const search = document.getElementById('search');
+  const cassettes = Array.from(document.querySelectorAll('.cassette'));
+  const noResults = document.getElementById('noResults');
+  const count = document.getElementById('count');
+  const totalTracks = document.querySelectorAll('.side li').length;
+
+  function updateCount(visibleAlbums, visibleTracks, filtering){
+    if(!filtering){
+      count.textContent = cassettes.length + ' cassettes · ' + totalTracks + ' tracks';
+    } else {
+      count.textContent = visibleTracks + ' track' + (visibleTracks===1?'':'s') + ' in ' + visibleAlbums + ' cassette' + (visibleAlbums===1?'':'s');
+    }
+  }
+  updateCount();
+
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let visibleAlbums = 0;
+    let visibleTracks = 0;
+
+    cassettes.forEach(card => {
+      const albumTitle = card.querySelector('.label-title').textContent.toLowerCase();
+      const items = card.querySelectorAll('.side li');
+      let albumMatches = q === '' || albumTitle.includes(q);
+      let anyTrackMatch = false;
+
+      items.forEach(li => {
+        const matches = q === '' || albumMatches || li.textContent.toLowerCase().includes(q);
+        li.classList.toggle('no-match', !matches);
+        if(matches){ anyTrackMatch = true; if(q!=='') visibleTracks++; }
+      });
+
+      const show = q === '' || albumMatches || anyTrackMatch;
+      card.hidden = !show;
+      if(show) visibleAlbums++;
+    });
+
+    noResults.classList.toggle('show', q !== '' && visibleAlbums === 0);
+    updateCount(visibleAlbums, visibleTracks, q !== '');
+  });
+</script>
+
+</body>
+</html>
